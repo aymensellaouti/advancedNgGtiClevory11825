@@ -55,7 +55,8 @@ import { CvService } from "./cv/services/cv.service";
 import { CONSTANTES } from "src/config/const.config";
 import { FakeCvService } from "./cv/services/fake-cv.service";
 import { LoggersInjectionToken } from "./injection tokens/logger.injection-token";
-
+import { UUID } from "./injection tokens/uuid.injection-token";
+import {v4 as uuidV4} from "uuid";
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,6 +130,10 @@ import { LoggersInjectionToken } from "./injection tokens/logger.injection-token
       // chneya bech nwafer
       useClass: CONSTANTES.env == 'dev' ? FakeCvService : CvService,
     },
+    {
+      provide: UUID,
+      useValue: uuidV4
+    }
   ],
   bootstrap: [AppComponent],
 })
