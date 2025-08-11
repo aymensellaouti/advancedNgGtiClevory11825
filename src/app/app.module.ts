@@ -57,6 +57,7 @@ import { FakeCvService } from "./cv/services/fake-cv.service";
 import { LoggersInjectionToken } from "./injection tokens/logger.injection-token";
 import { UUID } from "./injection tokens/uuid.injection-token";
 import {v4 as uuidV4} from "uuid";
+import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,6 +97,7 @@ import {v4 as uuidV4} from "uuid";
     RhComponent,
     UserListComponent,
     ProductsComponent,
+    WeekTodoComponent,
   ],
   imports: [
     BrowserModule,

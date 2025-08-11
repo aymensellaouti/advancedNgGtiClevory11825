@@ -11,7 +11,8 @@ let n = 1;
 export class TodoService {
   private todos: Todo[] = [];
   uuid = inject(UUID);
-  constructor(private loggerService: LoggerService) {}
+  readonly #loggerService = inject(LoggerService);
+  constructor() {}
 
   /**
    * elle retourne la liste des todos
@@ -52,6 +53,6 @@ export class TodoService {
    * Logger la liste des todos
    */
   logTodos() {
-    this.loggerService.logger(this.todos);
+    this.#loggerService.logger(this.todos);
   }
 }
