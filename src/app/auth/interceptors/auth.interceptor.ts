@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
       const cloneReq = request.clone({ headers });
       return next.handle(cloneReq);
     }
-    return next.handle(request);
+    return next.handle(request)
   }
 }
 
