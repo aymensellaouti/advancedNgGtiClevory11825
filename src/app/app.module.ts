@@ -61,6 +61,7 @@ import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 import { MasterDetailsComponent } from './cv/master-details/master-details.component';
 import { provide7aja } from "./factories/custom.factory";
 import { myCustomProvider } from "./providers/custom.provider";
+import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +103,7 @@ import { myCustomProvider } from "./providers/custom.provider";
     ProductsComponent,
     WeekTodoComponent,
     MasterDetailsComponent,
+    FromOfComponent
   ],
   imports: [
     BrowserModule,

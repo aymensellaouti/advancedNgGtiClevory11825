@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, inject, OnDestroy } from "@angular/core";
 import { Observable, Subscription, filter, map } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 
@@ -9,7 +9,8 @@ import { ToastrService } from "ngx-toastr";
 })
 export class TestObservableComponent {
   firstObservable$: Observable<number>;
-
+  toastr = inject(ToastrService);
+  countDown = 0;
   constructor(private toaster: ToastrService) {
     this.firstObservable$ = new Observable((observer) => {
       let i = 5;
@@ -22,5 +23,26 @@ export class TestObservableComponent {
         }
       }, 1000);
     });
+
+    this.firstObservable$.subscribe({
+      next: (data) => {
+        console.log(data);
+      }
+    });
+    this.firstObservable$.subscribe({
+      next: (data) => {
+        this.countDown = data;
+      }
+    });
+    setTimeout(() => {
+      this.firstObservable$.subscribe({
+        next: (data) => {
+          this.toaster.info('' + data);
+        },
+        complete: () => {
+          this.toaster.error('BOOOOM :D');
+        }
+      });
+    }, 3000)
   }
 }

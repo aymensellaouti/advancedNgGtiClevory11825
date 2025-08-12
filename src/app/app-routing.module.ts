@@ -14,6 +14,7 @@ import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import { MasterDetailsComponent } from "./cv/master-details/master-details.component";
 import { cvsResolverResolver } from "./cv/resolvers/cvs-resolver.resolver";
+import { canLeaveGuard } from "./guards/can-leave.guard";
 // cv/add
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
@@ -42,7 +43,7 @@ const routes: Route[] = [
     path: "",
     component: FrontComponent,
     children: [
-      { path: "todo", component: TodoComponent },
+      { path: "todo", component: TodoComponent, canDeactivate: [canLeaveGuard] },
       { path: "word", component: MiniWordComponent },
     ],
   },

@@ -1,5 +1,6 @@
 import { CanDeactivateFn } from '@angular/router';
+import { CanLeave } from '../interfaces/can-leave.interface';
 
-export const canLeaveGuard: CanDeactivateFn<unknown> = (component, currentRoute, currentState, nextState) => {
-  return true;
+export const canLeaveGuard: CanDeactivateFn<CanLeave> = (component, currentRoute, currentState, nextState) => {
+  return component.canLeave() ? true : confirm('etes vous sur de vouloir quitter ?')
 };
