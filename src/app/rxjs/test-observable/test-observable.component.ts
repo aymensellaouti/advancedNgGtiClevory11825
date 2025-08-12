@@ -1,16 +1,18 @@
 import { Component, inject, OnDestroy } from "@angular/core";
-import { Observable, Subscription, filter, map } from "rxjs";
+import { Observable, Subject, Subscription, filter, map, takeUntil } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: "app-test-observable",
-  templateUrl: "./test-observable.component.html",
-  styleUrls: ["./test-observable.component.css"],
+  selector: 'app-test-observable',
+  templateUrl: './test-observable.component.html',
+  styleUrls: ['./test-observable.component.css'],
 })
-export class TestObservableComponent {
+export class TestObservableComponent implements OnDestroy {
   firstObservable$: Observable<number>;
   toastr = inject(ToastrService);
   countDown = 0;
+  subbscription = new Subscription();
+  signalSubject = new Subject<void>();
   constructor(private toaster: ToastrService) {
     this.firstObservable$ = new Observable((observer) => {
       let i = 5;
@@ -23,26 +25,34 @@ export class TestObservableComponent {
         }
       }, 1000);
     });
-
-    this.firstObservable$.subscribe({
+    this.subbscription.add(
+    this.firstObservable$
+    .pipe(takeUntil(this.signalSubject))
+    .subscribe({
       next: (data) => {
         console.log(data);
-      }
-    });
+      },
+    }));
+    this.subbscription.add(
     this.firstObservable$.subscribe({
       next: (data) => {
         this.countDown = data;
-      }
-    });
+      },
+    }));
     setTimeout(() => {
-      this.firstObservable$.subscribe({
+      this.subbscription.add(this.firstObservable$.subscribe({
         next: (data) => {
           this.toaster.info('' + data);
         },
         complete: () => {
           this.toaster.error('BOOOOM :D');
-        }
-      });
-    }, 3000)
+        },
+      }));
+    }, 3000);
+  }
+  ngOnDestroy(): void {
+    this.subbscription.unsubscribe();
+    this.signalSubject.next();
+    this.signalSubject.complete();
   }
 }
