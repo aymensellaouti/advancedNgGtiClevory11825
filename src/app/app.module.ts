@@ -59,6 +59,8 @@ import { UUID } from "./injection tokens/uuid.injection-token";
 import {v4 as uuidV4} from "uuid";
 import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 import { MasterDetailsComponent } from './cv/master-details/master-details.component';
+import { provide7aja } from "./factories/custom.factory";
+import { myCustomProvider } from "./providers/custom.provider";
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,12 +123,12 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
     {
       provide: LoggersInjectionToken,
       useClass: LoggerService,
-      multi: true
+      multi: true,
     },
     {
       provide: LoggersInjectionToken,
       useClass: Logger2Service,
-      multi: true
+      multi: true,
     },
     {
       // esm el 7aja eli bech nwafarha
@@ -136,8 +138,9 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
     },
     {
       provide: UUID,
-      useValue: uuidV4
-    }
+      useValue: uuidV4,
+    },
+    myCustomProvider,
   ],
   bootstrap: [AppComponent],
 })
