@@ -27,9 +27,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  connectedUser$
-  isLoggedIn$
-  isLoggedOut$
+  // connectedUser$
+  // isLoggedIn$
+  // isLoggedOut$
   login(credentials: CredentialsDto): Observable<LoginResponseDto> {
     return this.http.post<LoginResponseDto>(API.login, credentials);
   }
