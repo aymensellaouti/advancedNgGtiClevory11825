@@ -25,10 +25,11 @@ export class AuthService {
    * Afficher dans le menu le mail de l'utilisateur authentifié sinon anonnyme
    */
 
-
-
   constructor(private http: HttpClient) {}
 
+  connectedUser$
+  isLoggedIn$
+  isLoggedOut$
   login(credentials: CredentialsDto): Observable<LoginResponseDto> {
     return this.http.post<LoginResponseDto>(API.login, credentials);
   }
