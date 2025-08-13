@@ -2,6 +2,7 @@ import { Component, inject } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
+  FormGroup,
   NgForm,
   Validators,
 } from "@angular/forms";
@@ -21,7 +22,6 @@ export class AddCvComponent {
   cvService = inject(CvService);
   router = inject(Router);
   toastr = inject(ToastrService);
-
   form = this.formBuilder.group(
     {
       name: ["", Validators.required],
@@ -33,6 +33,7 @@ export class AddCvComponent {
         {
           validators: [Validators.required, Validators.pattern("[0-9]{8}")],
           asyncValidators: [],
+          updateOn: 'change'
         },
       ],
       age: [
@@ -48,8 +49,8 @@ export class AddCvComponent {
     }
   );
 
-  addCv(cv: Cv) {
-    this.cvService.addCv(cv).subscribe({
+  addCv() {
+    this.cvService.addCv(this.form.getRawValue() as Cv).subscribe({
       next: () => {
         this.toastr.success(`Le cv a été ajouté avec succès`);
         this.router.navigate([APP_ROUTES.cv]);
