@@ -11,6 +11,9 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
+import { filter } from "rxjs";
+import { CONSTANTES } from "src/config/const.config";
+import { uniqueCinValidator } from "src/app/validators/unique-cin.validator";
 
 @Component({
   selector: "app-add-cv",
@@ -31,15 +34,16 @@ export class AddCvComponent {
       cin: [
         "",
         {
-          validators: [Validators.required, Validators.pattern("[0-9]{8}")],
-          asyncValidators: [],
-          updateOn: 'change'
+          // validators: [Validators.required, Validators.pattern("[0-9]{8}")],
+          asyncValidators: [uniqueCinValidator(this.cvService)],
+          updateOn: 'blur'
         },
       ],
       age: [
         0,
         {
           validators: [Validators.required],
+          updateOn: 'blur'
         },
       ],
     },
@@ -48,12 +52,39 @@ export class AddCvComponent {
       asyncValidators: [],
     }
   );
+  ngOnInit(): void {
+    const savedForm = localStorage.getItem(CONSTANTES.savedForm);
+    if (savedForm) {
+      this.form.patchValue(JSON.parse(savedForm));
+    }
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.age.valueChanges.subscribe({
+      next: age => {
+        if (age < 18) {
+          this.path?.disable({onlySelf: true});
+        } else {
+          this.path?.enable({ onlySelf: true });
+        }
+      }
+    });
+    this.form.statusChanges.pipe(
+      filter(() => this.form.valid)
+    ).subscribe({
+      next: () => {
+        const savedForm = JSON.stringify(this.form.getRawValue());
+        localStorage.setItem(CONSTANTES.savedForm, savedForm);
+      }
+    })
+  }
 
   addCv() {
     this.cvService.addCv(this.form.getRawValue() as Cv).subscribe({
       next: () => {
         this.toastr.success(`Le cv a été ajouté avec succès`);
         this.router.navigate([APP_ROUTES.cv]);
+        this.form.reset();
+        localStorage.removeItem(CONSTANTES.savedForm);
       },
       error: (erreur) => {
         console.log(erreur);

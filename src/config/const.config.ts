@@ -1,6 +1,7 @@
 export const CONSTANTES = {
   defaultImage: 'cv.png',
   env: 'prod',
+  savedForm: 'savedForm',
   token: 'token',
   connectedUser: 'connectedUser',
   tokenParamName: 'access_token',
