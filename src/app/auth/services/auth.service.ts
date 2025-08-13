@@ -3,7 +3,7 @@ import { CredentialsDto } from '../dto/credentials.dto';
 import { LoginResponseDto } from '../dto/login-response.dto';
 import { HttpClient } from '@angular/common/http';
 import { API } from '../../../config/api.config';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { CONSTANTES } from 'src/config/const.config';
 
 export class ConnectedUser {
@@ -24,14 +24,30 @@ export class AuthService {
    * Garder la trace de l'utilisateur authentifié meme si on recharge l'application
    * Afficher dans le menu le mail de l'utilisateur authentifié sinon anonnyme
    */
+  #connectedUser$ = new BehaviorSubject<ConnectedUser | null>(null);
+  connectedUser$ = this.#connectedUser$.asObservable();
+  isLoggedIn$ = this.connectedUser$.pipe(map((user) => !!user));
+  isLoggedOut$ = this.connectedUser$.pipe(map((user) => !user));
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const user = localStorage.getItem(CONSTANTES.connectedUser);
+    if (user) {
+      this.#connectedUser$.next(JSON.parse(user));
+    }
+  }
 
-  // connectedUser$
-  // isLoggedIn$
-  // isLoggedOut$
   login(credentials: CredentialsDto): Observable<LoginResponseDto> {
-    return this.http.post<LoginResponseDto>(API.login, credentials);
+    return this.http.post<LoginResponseDto>(API.login, credentials).pipe(
+      tap( apiResponse => {
+        this.saveToken(apiResponse.id);
+        const connectedUser: ConnectedUser = {
+          id: apiResponse.userId,
+          email: credentials.email
+        };
+        localStorage.setItem(CONSTANTES.connectedUser, JSON.stringify(connectedUser));
+        this.#connectedUser$.next(connectedUser);
+      })
+    );
   }
 
   isAuthenticated(): boolean {
@@ -40,6 +56,10 @@ export class AuthService {
 
   logout() {
     this.removeToken();
+    localStorage.removeItem(
+      CONSTANTES.connectedUser,
+    );
+    this.#connectedUser$.next(null);
   }
 
   saveToken(token: string) {
@@ -53,5 +73,4 @@ export class AuthService {
   removeToken() {
     localStorage.removeItem(CONSTANTES.token);
   }
-
 }

@@ -15,6 +15,7 @@ import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import { MasterDetailsComponent } from "./cv/master-details/master-details.component";
 import { cvsResolverResolver } from "./cv/resolvers/cvs-resolver.resolver";
 import { canLeaveGuard } from "./guards/can-leave.guard";
+import { ProductsComponent } from "./products/products.component";
 // cv/add
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
@@ -39,6 +40,7 @@ const routes: Route[] = [
     ]
   },
   { path: "cv/:id", component: DetailsCvComponent },
+  { path: "products", component: ProductsComponent },
   {
     path: "",
     component: FrontComponent,
