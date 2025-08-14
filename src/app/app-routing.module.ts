@@ -20,7 +20,10 @@ import { ProductsComponent } from "./products/products.component";
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
   { path: "rh", component: RhComponent },
-
+  { path: 'todo', loadChildren: () => import('./todo/todo.module').then(
+      module => module.TodoModule
+    )
+  },
   { path: "products", component: ProductsComponent },
   {
     path: "",

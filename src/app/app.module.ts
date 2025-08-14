@@ -50,7 +50,7 @@ import {v4 as uuidV4} from "uuid";
 import { myCustomProvider } from "./providers/custom.provider";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 import { TtcComponent } from './signals/ttc/ttc.component';
-import { TodoModule } from "./todo/todo.module";
+
 import { CvModule } from "./cv/cv.module";
 @NgModule({
   // Components, Directives, Pipes
@@ -90,7 +90,6 @@ import { CvModule } from "./cv/cv.module";
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    TodoModule,
     CvModule,
     AppRoutingModule,
     HttpClientModule,
