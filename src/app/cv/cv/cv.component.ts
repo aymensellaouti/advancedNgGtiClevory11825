@@ -6,9 +6,10 @@ import { CvService } from "../services/cv.service";
 import { EMPTY, Observable, catchError, of } from "rxjs";
 import { TodoService } from "src/app/todo/service/todo.service";
 @Component({
-  selector: 'app-cv',
-  templateUrl: './cv.component.html',
-  styleUrls: ['./cv.component.css'],
+    selector: 'app-cv',
+    templateUrl: './cv.component.html',
+    styleUrls: ['./cv.component.css'],
+    standalone: false
 })
 export class CvComponent {
   cvs$: Observable<Cv[]> = this.cvService.getCvs().pipe(

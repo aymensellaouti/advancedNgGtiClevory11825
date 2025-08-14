@@ -8,7 +8,8 @@ export const fibonnaci = (n: number): number => {
 };
 
 @Pipe({
-  name: 'fibo',
+    name: 'fibo',
+    standalone: false
 })
 export class FiboPipe implements PipeTransform {
   @memo()
