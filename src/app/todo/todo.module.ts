@@ -14,4 +14,4 @@ import { CommonModule } from "@angular/common";
   providers: [],
   exports: []
 })
-export class TodoModule {}
+export default class TodoModule {}

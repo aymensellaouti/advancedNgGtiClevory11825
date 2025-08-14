@@ -50,8 +50,9 @@ import {v4 as uuidV4} from "uuid";
 import { myCustomProvider } from "./providers/custom.provider";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 import { TtcComponent } from './signals/ttc/ttc.component';
+import { InputSignalComponent } from "./signals/input-signal/input-signal.component";
+import { IsEvenComponent } from "./signals/is-even/is-even.component";
 
-import { CvModule } from "./cv/cv.module";
 @NgModule({
   // Components, Directives, Pipes
   // ELi lahna ma 3andou 7ad akher el 7a9 ideclarihom
@@ -82,7 +83,9 @@ import { CvModule } from "./cv/cv.module";
     UserListComponent,
     ProductsComponent,
     FromOfComponent,
-    TtcComponent
+    TtcComponent,
+    InputSignalComponent,
+    IsEvenComponent
   ],
   // Les modules eli nest7a9ouhom (nest7a9ou el 7ajet eli iexportihom)
   imports: [
@@ -90,7 +93,6 @@ import { CvModule } from "./cv/cv.module";
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    CvModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

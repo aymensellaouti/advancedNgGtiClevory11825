@@ -11,13 +11,13 @@ import { cvsResolverResolver } from './resolvers/cvs-resolver.resolver';
 export const CvRoutes: Routes = [
   // Cv Routes
   {
-    path: 'cv',
+    path: '',
     component: CvComponent,
   },
   // cv/add
-  { path: 'cv/add', component: AddCvComponent, canActivate: [authGuard] },
+  { path: 'add', component: AddCvComponent, canActivate: [authGuard] },
   {
-    path: 'cv/list',
+    path: 'list',
     component: MasterDetailsComponent,
     resolve: {
       cvs: cvsResolverResolver,
@@ -27,7 +27,7 @@ export const CvRoutes: Routes = [
     },
     children: [{ path: ':id', component: DetailsCvComponent }],
   },
-  { path: 'cv/:id', component: DetailsCvComponent },
+  { path: ':id', component: DetailsCvComponent },
 ];
 
 @NgModule({
