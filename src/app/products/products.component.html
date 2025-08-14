@@ -1,4 +1,4 @@
-@if ((products$ | async); as productsList) {
+@if ((productResource.value()); as productsList) {
   <button [disabled]="getMoreButtonDisabled" class="btn btn-primary" (click)="more()"> More Products</button>
   <div class="alert alert-warning">
     Product Number: {{productsList?.length}}
@@ -11,7 +11,12 @@
       </div>
     }
   </div>
-} @else {
-  Loading...
+}
+@if(productResource.isLoading()) {
+  loading...
+}
+
+@if(productResource.error()) {
+  {{productResource.error()}}
 }
 

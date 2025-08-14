@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, input } from '@angular/core';
 import { Cv } from '../model/cv';
 import { CvService } from '../services/cv.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,14 +6,16 @@ import { ToastrService } from 'ngx-toastr';
 import { APP_ROUTES } from '../../../config/routes.config';
 import { AuthService } from '../../auth/services/auth.service';
 import { catchError, EMPTY, Observable, switchMap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { DefaultImagePipe } from '../pipes/default-image.pipe';
+import { httpResource } from '@angular/common/http';
+import { API } from 'src/config/api.config';
 
 @Component({
     selector: 'app-details-cv',
     templateUrl: './details-cv.component.html',
     styleUrls: ['./details-cv.component.css'],
-    imports: [AsyncPipe, DefaultImagePipe]
+    imports: [AsyncPipe, DefaultImagePipe, JsonPipe]
 })
 export class DetailsCvComponent implements OnInit {
   private cvService = inject(CvService);
@@ -21,7 +23,7 @@ export class DetailsCvComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private toastr = inject(ToastrService);
   authService = inject(AuthService);
-
+  id = input('id');
   cv$: Observable<Cv> = this.activatedRoute.params.pipe(
     switchMap((params) => this.cvService.getCvById(+params['id'])),
     catchError((e) => {
@@ -29,6 +31,10 @@ export class DetailsCvComponent implements OnInit {
       return EMPTY;
     })
   );
+
+  cvHttpResource = httpResource(
+    () => API.cv + this.id()
+  )
 
   ngOnInit() {
     // this.activatedRoute.params.subscribe({

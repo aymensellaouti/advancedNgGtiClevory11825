@@ -17,7 +17,7 @@ import { appRoutes } from './app/app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { isDevMode, importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
-import { provideRouter, withPreloading } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withPreloading } from '@angular/router';
 import { CustomPreloadingStrategy } from './app/Preloading Strategy/custom.preloading-strategy';
 
 
@@ -59,6 +59,6 @@ bootstrapApplication(AppComponent, {
     myCustomProvider,
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
-    provideRouter(appRoutes, withPreloading(CustomPreloadingStrategy)),
+    provideRouter(appRoutes, withPreloading(CustomPreloadingStrategy), withComponentInputBinding()),
   ],
 }).catch((err) => console.error(err));
