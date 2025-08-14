@@ -22,7 +22,6 @@ import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { NgstyleComponent } from "./directives/ngstyle/ngstyle.component";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { NgclassComponent } from "./directives/ngclass/ngclass.component";
-import { TodoComponent } from "./todo/todo/todo.component";
 
 import { HighlightDirective } from "./directives/highlight.directive";
 import { RainbowDirective } from "./directives/rainbow.directive";
@@ -57,12 +56,12 @@ import { FakeCvService } from "./cv/services/fake-cv.service";
 import { LoggersInjectionToken } from "./injection tokens/logger.injection-token";
 import { UUID } from "./injection tokens/uuid.injection-token";
 import {v4 as uuidV4} from "uuid";
-import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 import { MasterDetailsComponent } from './cv/master-details/master-details.component';
 import { provide7aja } from "./factories/custom.factory";
 import { myCustomProvider } from "./providers/custom.provider";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 import { TtcComponent } from './signals/ttc/ttc.component';
+import { TodoModule } from "./todo/todo.module";
 @NgModule({
   // Components, Directives, Pipes
   // ELi lahna ma 3andou 7ad akher el 7a9 ideclarihom
@@ -91,7 +90,6 @@ import { TtcComponent } from './signals/ttc/ttc.component';
     HighlightDirective,
     RainbowDirective,
     Btc2usdPipe,
-    TodoComponent,
     NavbarComponent,
     FrontComponent,
     AdminComponent,
@@ -104,7 +102,6 @@ import { TtcComponent } from './signals/ttc/ttc.component';
     RhComponent,
     UserListComponent,
     ProductsComponent,
-    WeekTodoComponent,
     MasterDetailsComponent,
     FromOfComponent,
     TtcComponent
@@ -115,6 +112,7 @@ import { TtcComponent } from './signals/ttc/ttc.component';
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    TodoModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
