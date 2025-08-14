@@ -24,7 +24,11 @@ export class RhComponent implements OnInit {
     )
     }
   addUser(list: User[], newUser: string) {
-    this.userService.addUser(list, newUser);
+    setTimeout(() => {
+      this.chart.destroy();
+      this.createChart();
+    })
+    return this.userService.addUser(list, newUser);
   }
   createChart(){
     const data = [

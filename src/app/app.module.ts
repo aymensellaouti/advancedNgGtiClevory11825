@@ -54,6 +54,8 @@ import { InputSignalComponent } from "./signals/input-signal/input-signal.compon
 import { IsEvenComponent } from "./signals/is-even/is-even.component";
 import { PereCdComponent } from './cd/pere-cd/pere-cd.component';
 import { FilsCdComponent } from './cd/fils-cd/fils-cd.component';
+import { UserListElementsComponent } from './optimizationPattern/user-list-elements/user-list-elements.component';
+import { FiboPipe } from './pipes/fibo.pipe';
 
 @NgModule({
   // Components, Directives, Pipes
@@ -89,7 +91,9 @@ import { FilsCdComponent } from './cd/fils-cd/fils-cd.component';
     InputSignalComponent,
     IsEvenComponent,
     PereCdComponent,
-    FilsCdComponent
+    FilsCdComponent,
+    UserListElementsComponent,
+    FiboPipe
   ],
   // Les modules eli nest7a9ouhom (nest7a9ou el 7ajet eli iexportihom)
   imports: [
