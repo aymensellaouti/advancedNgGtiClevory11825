@@ -2,7 +2,7 @@ import { NgModule, isDevMode } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 import { ToastrModule } from "ngx-toastr";
 
@@ -57,84 +57,78 @@ import { FilsCdComponent } from './cd/fils-cd/fils-cd.component';
 import { UserListElementsComponent } from './optimizationPattern/user-list-elements/user-list-elements.component';
 import { FiboPipe } from './pipes/fibo.pipe';
 
-@NgModule({
-  // Components, Directives, Pipes
-  // ELi lahna ma 3andou 7ad akher el 7a9 ideclarihom
-  declarations: [
-    AppComponent,
-    FirstComponent,
-    SecondComponent,
-    ColorComponent,
-    TwoComponent,
-    PereComponent,
-    FilsComponent,
-    NgstyleComponent,
-    MiniWordComponent,
-    NgclassComponent,
-    HighlightDirective,
-    RainbowDirective,
-    Btc2usdPipe,
-    NavbarComponent,
-    FrontComponent,
-    AdminComponent,
-    NF404Component,
-    TestFormComponent,
-    LoginComponent,
-    TestObservableComponent,
-    SliderComponent,
-    TestHttpComponent,
-    RhComponent,
-    UserListComponent,
-    ProductsComponent,
-    FromOfComponent,
-    TtcComponent,
-    InputSignalComponent,
-    IsEvenComponent,
-    PereCdComponent,
-    FilsCdComponent,
-    UserListElementsComponent,
-    FiboPipe
-  ],
-  // Les modules eli nest7a9ouhom (nest7a9ou el 7ajet eli iexportihom)
-  imports: [
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
-  ],
-  providers: [
-    AuthInterceptorProvider,
-    {
-      provide: LoggersInjectionToken,
-      useClass: LoggerService,
-      multi: true,
-    },
-    {
-      provide: LoggersInjectionToken,
-      useClass: Logger2Service,
-      multi: true,
-    },
-    {
-      // esm el 7aja eli bech nwafarha
-      provide: CvService,
-      // chneya bech nwafer
-      useClass: CONSTANTES.env == 'dev' ? FakeCvService : CvService,
-    },
-    {
-      provide: UUID,
-      useValue: uuidV4,
-    },
-    myCustomProvider,
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ 
+    // Components, Directives, Pipes
+    // ELi lahna ma 3andou 7ad akher el 7a9 ideclarihom
+    declarations: [
+        AppComponent,
+        FirstComponent,
+        SecondComponent,
+        ColorComponent,
+        TwoComponent,
+        PereComponent,
+        FilsComponent,
+        NgstyleComponent,
+        MiniWordComponent,
+        NgclassComponent,
+        HighlightDirective,
+        RainbowDirective,
+        Btc2usdPipe,
+        NavbarComponent,
+        FrontComponent,
+        AdminComponent,
+        NF404Component,
+        TestFormComponent,
+        LoginComponent,
+        TestObservableComponent,
+        SliderComponent,
+        TestHttpComponent,
+        RhComponent,
+        UserListComponent,
+        ProductsComponent,
+        FromOfComponent,
+        TtcComponent,
+        InputSignalComponent,
+        IsEvenComponent,
+        PereCdComponent,
+        FilsCdComponent,
+        UserListElementsComponent,
+        FiboPipe
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule, // required animations module
+        ToastrModule.forRoot(), // ToastrModule added
+        AppRoutingModule,
+        ReactiveFormsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000',
+        })], providers: [
+        AuthInterceptorProvider,
+        {
+            provide: LoggersInjectionToken,
+            useClass: LoggerService,
+            multi: true,
+        },
+        {
+            provide: LoggersInjectionToken,
+            useClass: Logger2Service,
+            multi: true,
+        },
+        {
+            // esm el 7aja eli bech nwafarha
+            provide: CvService,
+            // chneya bech nwafer
+            useClass: CONSTANTES.env == 'dev' ? FakeCvService : CvService,
+        },
+        {
+            provide: UUID,
+            useValue: uuidV4,
+        },
+        myCustomProvider,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
