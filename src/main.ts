@@ -1,6 +1,3 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-
 import { AuthInterceptorProvider } from './app/auth/interceptors/auth.interceptor';
 import { LoggersInjectionToken } from './app/injection tokens/logger.injection-token';
 import { LoggerService } from './app/services/logger.service';
@@ -16,46 +13,52 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { AppRoutingModule } from './app/app-routing.module';
+import { appRoutes } from './app/app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { isDevMode, importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
+import { provideRouter, withPreloading } from '@angular/router';
+import { CustomPreloadingStrategy } from './app/Preloading Strategy/custom.preloading-strategy';
 
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        importProvidersFrom(BrowserModule, FormsModule, // required animations module
-        ToastrModule.forRoot(), // ToastrModule added
-        AppRoutingModule, ReactiveFormsModule, ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: 'registerWhenStable:30000',
-        })),
-        AuthInterceptorProvider,
-        {
-            provide: LoggersInjectionToken,
-            useClass: LoggerService,
-            multi: true,
-        },
-        {
-            provide: LoggersInjectionToken,
-            useClass: Logger2Service,
-            multi: true,
-        },
-        {
-            // esm el 7aja eli bech nwafarha
-            provide: CvService,
-            // chneya bech nwafer
-            useClass: CONSTANTES.env == 'dev' ? FakeCvService : CvService,
-        },
-        {
-            provide: UUID,
-            useValue: uuidV4,
-        },
-        myCustomProvider,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideAnimations()
-    ]
-})
-  .catch(err => console.error(err));
+  providers: [
+    importProvidersFrom(
+      BrowserModule,
+      FormsModule, // required animations module
+      ToastrModule.forRoot(), // ToastrModule added
+      ReactiveFormsModule,
+      ServiceWorkerModule.register('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        // Register the ServiceWorker as soon as the application is stable
+        // or after 30 seconds (whichever comes first).
+        registrationStrategy: 'registerWhenStable:30000',
+      })
+    ),
+    AuthInterceptorProvider,
+    {
+      provide: LoggersInjectionToken,
+      useClass: LoggerService,
+      multi: true,
+    },
+    {
+      provide: LoggersInjectionToken,
+      useClass: Logger2Service,
+      multi: true,
+    },
+    {
+      // esm el 7aja eli bech nwafarha
+      provide: CvService,
+      // chneya bech nwafer
+      useClass: CONSTANTES.env == 'dev' ? FakeCvService : CvService,
+    },
+    {
+      provide: UUID,
+      useValue: uuidV4,
+    },
+    myCustomProvider,
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
+    provideRouter(appRoutes, withPreloading(CustomPreloadingStrategy)),
+  ],
+}).catch((err) => console.error(err));
