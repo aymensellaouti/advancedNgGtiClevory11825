@@ -1,0 +1,5 @@
+<p>pere-cd works!</p>
+<input type="text" #userEmail (input)="updateUser(userEmail.value)" class="form-control">
+<input type="text" [(ngModel)]="name" class="form-control">
+
+<app-fils-cd [user]="user" [name]="name"/>

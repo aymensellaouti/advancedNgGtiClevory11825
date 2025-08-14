@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ApplicationRef, Component, inject } from "@angular/core";
 import { LoggerService } from "./services/logger.service";
 import { LoggersInjectionToken } from "./injection tokens/logger.injection-token";
 
@@ -9,6 +9,7 @@ import { LoggersInjectionToken } from "./injection tokens/logger.injection-token
 })
 export class AppComponent {
   title = 'Starting Advanced Topics';
+  ar = inject(ApplicationRef);
   loggers = inject(LoggersInjectionToken);
   constructor() {
     this.loggers.forEach(logger => logger.logger('GTI'))

@@ -52,6 +52,8 @@ import { FromOfComponent } from "./rxjs/from-of/from-of.component";
 import { TtcComponent } from './signals/ttc/ttc.component';
 import { InputSignalComponent } from "./signals/input-signal/input-signal.component";
 import { IsEvenComponent } from "./signals/is-even/is-even.component";
+import { PereCdComponent } from './cd/pere-cd/pere-cd.component';
+import { FilsCdComponent } from './cd/fils-cd/fils-cd.component';
 
 @NgModule({
   // Components, Directives, Pipes
@@ -85,7 +87,9 @@ import { IsEvenComponent } from "./signals/is-even/is-even.component";
     FromOfComponent,
     TtcComponent,
     InputSignalComponent,
-    IsEvenComponent
+    IsEvenComponent,
+    PereCdComponent,
+    FilsCdComponent
   ],
   // Les modules eli nest7a9ouhom (nest7a9ou el 7ajet eli iexportihom)
   imports: [
