@@ -12,7 +12,7 @@ export const CvRoutes: Routes = [
   // Cv Routes
   {
     path: '',
-    loadComponent: () => import('./add-cv/add-cv.component').then(m => m.CvComponent),
+    loadComponent: () => import('./cv/cv.component').then(m => m.CvComponent),
   },
   // cv/add
   { path: 'add', loadComponent: () => import('./add-cv/add-cv.component').then(m => m.AddCvComponent), canActivate: [authGuard] },

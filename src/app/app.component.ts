@@ -4,12 +4,14 @@ import { LoggersInjectionToken } from "./injection tokens/logger.injection-token
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { RouterOutlet } from "@angular/router";
 import { PereCdComponent } from "./cd/pere-cd/pere-cd.component";
+import { SomComponent } from "./components/som/som.component";
+import { TtcComponent } from "./signals/ttc/ttc.component";
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    imports: [NavbarComponent, RouterOutlet, PereCdComponent]
+    imports: [NavbarComponent, RouterOutlet, PereCdComponent, SomComponent, TtcComponent]
 })
 export class AppComponent {
   title = 'Starting Advanced Topics';
