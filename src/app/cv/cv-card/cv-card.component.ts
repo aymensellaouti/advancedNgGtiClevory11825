@@ -2,7 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { Cv } from '../model/cv';
 import { EmbaucheService } from '../services/embauche.service';
 import { ToastrService } from 'ngx-toastr';
-import { NgIf } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 import { DefaultImagePipe } from '../pipes/default-image.pipe';
 
@@ -10,7 +10,7 @@ import { DefaultImagePipe } from '../pipes/default-image.pipe';
     selector: 'app-cv-card',
     templateUrl: './cv-card.component.html',
     styleUrls: ['./cv-card.component.css'],
-    imports: [NgIf, RouterLink, DefaultImagePipe]
+    imports: [RouterLink, DefaultImagePipe]
 })
 export class CvCardComponent {
   private embaucheService = inject(EmbaucheService);
