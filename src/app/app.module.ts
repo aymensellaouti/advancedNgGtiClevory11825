@@ -62,7 +62,10 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
 import { provide7aja } from "./factories/custom.factory";
 import { myCustomProvider } from "./providers/custom.provider";
 import { FromOfComponent } from "./rxjs/from-of/from-of.component";
+import { TtcComponent } from './signals/ttc/ttc.component';
 @NgModule({
+  // Components, Directives, Pipes
+  // ELi lahna ma 3andou 7ad akher el 7a9 ideclarihom
   declarations: [
     AppComponent,
     FirstComponent,
@@ -103,8 +106,10 @@ import { FromOfComponent } from "./rxjs/from-of/from-of.component";
     ProductsComponent,
     WeekTodoComponent,
     MasterDetailsComponent,
-    FromOfComponent
+    FromOfComponent,
+    TtcComponent
   ],
+  // Les modules eli nest7a9ouhom (nest7a9ou el 7ajet eli iexportihom)
   imports: [
     BrowserModule,
     FormsModule,
