@@ -1,11 +1,5 @@
 import { Component, inject } from "@angular/core";
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  NgForm,
-  Validators,
-} from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, NgForm, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CvService } from "../services/cv.service";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -15,12 +9,13 @@ import { filter } from "rxjs";
 import { CONSTANTES } from "src/config/const.config";
 import { uniqueCinValidator } from "src/app/validators/unique-cin.validator";
 import { ageCinValidator } from "src/app/validators/cin-age.validator";
+import { NgIf } from "@angular/common";
 
 @Component({
     selector: 'app-add-cv',
     templateUrl: './add-cv.component.html',
     styleUrls: ['./add-cv.component.css'],
-    standalone: false
+    imports: [FormsModule, ReactiveFormsModule, NgIf]
 })
 export class AddCvComponent {
   formBuilder = inject(FormBuilder);

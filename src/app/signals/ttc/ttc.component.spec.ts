@@ -8,8 +8,8 @@ describe('TtcComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TtcComponent]
-    });
+    imports: [TtcComponent]
+});
     fixture = TestBed.createComponent(TtcComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

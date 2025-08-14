@@ -2,14 +2,15 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { CvService } from '../services/cv.service';
 import { Cv } from '../model/cv';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { ListComponent } from '../list/list.component';
 @Component({
     selector: 'app-master-details',
     templateUrl: './master-details.component.html',
     styleUrls: ['./master-details.component.css'],
-    standalone: false
+    imports: [ListComponent, RouterOutlet]
 })
 export class MasterDetailsComponent{
   acr = inject(ActivatedRoute);

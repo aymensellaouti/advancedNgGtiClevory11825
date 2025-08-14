@@ -1,12 +1,13 @@
 import { Component, inject, OnDestroy } from "@angular/core";
 import { Observable, Subject, Subscription, filter, map, takeUntil } from "rxjs";
 import { ToastrService } from "ngx-toastr";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
     selector: 'app-test-observable',
     templateUrl: './test-observable.component.html',
     styleUrls: ['./test-observable.component.css'],
-    standalone: false
+    imports: [AsyncPipe]
 })
 export class TestObservableComponent implements OnDestroy {
   firstObservable$: Observable<number>;

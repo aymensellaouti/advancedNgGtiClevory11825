@@ -7,11 +7,9 @@ import { CommonModule } from "@angular/common";
 
 
 @NgModule({
-  // qui appartient à ce module
-  declarations: [TodoComponent, WeekTodoComponent],
-  // chneya iest7a9 el module Hadha
-  imports: [TodoRoutingModule, FormsModule, CommonModule],
-  providers: [],
-  exports: []
+    // chneya iest7a9 el module Hadha
+    imports: [TodoRoutingModule, FormsModule, CommonModule, TodoComponent, WeekTodoComponent],
+    providers: [],
+    exports: []
 })
 export default class TodoModule {}

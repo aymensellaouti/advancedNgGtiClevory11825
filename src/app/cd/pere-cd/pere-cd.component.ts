@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { ConnectedUser } from 'src/app/auth/services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { FilsCdComponent } from '../fils-cd/fils-cd.component';
 
 @Component({
     selector: 'app-pere-cd',
     templateUrl: './pere-cd.component.html',
     styleUrls: ['./pere-cd.component.css'],
-    standalone: false
+    imports: [FormsModule, FilsCdComponent]
 })
 export class PereCdComponent {
   user: ConnectedUser = {

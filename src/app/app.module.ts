@@ -57,12 +57,22 @@ import { FilsCdComponent } from './cd/fils-cd/fils-cd.component';
 import { UserListElementsComponent } from './optimizationPattern/user-list-elements/user-list-elements.component';
 import { FiboPipe } from './pipes/fibo.pipe';
 
-@NgModule({ 
+@NgModule({
     // Components, Directives, Pipes
     // ELi lahna ma 3andou 7ad akher el 7a9 ideclarihom
-    declarations: [
-        AppComponent,
-        FirstComponent,
+    declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule, // required animations module
+        ToastrModule.forRoot(), // ToastrModule added
+        AppRoutingModule,
+        ReactiveFormsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000',
+        }), FirstComponent,
         SecondComponent,
         ColorComponent,
         TwoComponent,
@@ -93,20 +103,7 @@ import { FiboPipe } from './pipes/fibo.pipe';
         PereCdComponent,
         FilsCdComponent,
         UserListElementsComponent,
-        FiboPipe
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        FormsModule,
-        BrowserAnimationsModule, // required animations module
-        ToastrModule.forRoot(), // ToastrModule added
-        AppRoutingModule,
-        ReactiveFormsModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: 'registerWhenStable:30000',
-        })], providers: [
+        FiboPipe], providers: [
         AuthInterceptorProvider,
         {
             provide: LoggersInjectionToken,
@@ -130,5 +127,6 @@ import { FiboPipe } from './pipes/fibo.pipe';
         },
         myCustomProvider,
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
+    ]
+})
 export class AppModule {}

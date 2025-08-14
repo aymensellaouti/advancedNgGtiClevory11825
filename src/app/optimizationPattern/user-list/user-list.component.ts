@@ -1,12 +1,14 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {User} from "../users.service";
+import { FormsModule } from '@angular/forms';
+import { UserListElementsComponent } from '../user-list-elements/user-list-elements.component';
 
 
 @Component({
     selector: 'app-user-list',
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.css'],
-    standalone: false
+    imports: [FormsModule, UserListElementsComponent]
 })
 export class UserListComponent {
   @Input() usersCluster: string = '';
