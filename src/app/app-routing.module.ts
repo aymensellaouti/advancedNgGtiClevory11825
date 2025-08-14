@@ -20,26 +20,7 @@ import { ProductsComponent } from "./products/products.component";
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
   { path: "rh", component: RhComponent },
-  {
-    path: "cv",
-    component: CvComponent,
-  },
-  // cv/add
-  { path: "cv/add", component: AddCvComponent, canActivate: [authGuard] },
-  {
-    path: "cv/list",
-    component: MasterDetailsComponent,
-    resolve: {
-      cvs: cvsResolverResolver
-    },
-    data: {
-      roles: ['admin', 'user']
-    },
-    children: [
-      {path: ':id', component: DetailsCvComponent}
-    ]
-  },
-  { path: "cv/:id", component: DetailsCvComponent },
+
   { path: "products", component: ProductsComponent },
   {
     path: "",
