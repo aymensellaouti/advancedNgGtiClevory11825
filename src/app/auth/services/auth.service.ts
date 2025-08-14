@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CredentialsDto } from '../dto/credentials.dto';
 import { LoginResponseDto } from '../dto/login-response.dto';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,8 @@ export class ConnectedUser {
   providedIn: 'root',
 })
 export class AuthService {
+  private http = inject(HttpClient);
+
   /**
    * Todos:
    * Ajouter un stream pour le user authentifié
@@ -29,7 +31,7 @@ export class AuthService {
   isLoggedIn$ = this.connectedUser$.pipe(map((user) => !!user));
   isLoggedOut$ = this.connectedUser$.pipe(map((user) => !user));
 
-  constructor(private http: HttpClient) {
+  constructor() {
     const user = localStorage.getItem(CONSTANTES.connectedUser);
     if (user) {
       this.#connectedUser$.next(JSON.parse(user));

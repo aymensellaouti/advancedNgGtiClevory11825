@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Cv } from '../model/cv';
 import { CvService } from '../services/cv.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +16,12 @@ import { DefaultImagePipe } from '../pipes/default-image.pipe';
     imports: [NgIf, AsyncPipe, DefaultImagePipe]
 })
 export class DetailsCvComponent implements OnInit {
+  private cvService = inject(CvService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private toastr = inject(ToastrService);
+  authService = inject(AuthService);
+
   cv$: Observable<Cv> = this.activatedRoute.params.pipe(
     switchMap((params) => this.cvService.getCvById(+params['id'])),
     catchError((e) => {
@@ -23,13 +29,6 @@ export class DetailsCvComponent implements OnInit {
       return EMPTY;
     })
   );
-  constructor(
-    private cvService: CvService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private toastr: ToastrService,
-    public authService: AuthService
-  ) {}
 
   ngOnInit() {
     // this.activatedRoute.params.subscribe({

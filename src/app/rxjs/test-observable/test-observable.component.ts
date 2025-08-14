@@ -10,12 +10,14 @@ import { AsyncPipe } from "@angular/common";
     imports: [AsyncPipe]
 })
 export class TestObservableComponent implements OnDestroy {
+  private toaster = inject(ToastrService);
+
   firstObservable$: Observable<number>;
   toastr = inject(ToastrService);
   countDown = 0;
   subbscription = new Subscription();
   signalSubject = new Subject<void>();
-  constructor(private toaster: ToastrService) {
+  constructor() {
     this.firstObservable$ = new Observable((observer) => {
       let i = 5;
       const intervalIndex = setInterval(() => {

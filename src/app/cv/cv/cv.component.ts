@@ -16,6 +16,10 @@ import { AsyncPipe, UpperCasePipe, DatePipe } from "@angular/common";
     imports: [ListComponent, CvCardComponent, EmbaucheComponent, AsyncPipe, UpperCasePipe, DatePipe]
 })
 export class CvComponent {
+  private logger = inject(LoggerService);
+  private toastr = inject(ToastrService);
+  private cvService = inject(CvService);
+
   cvs$: Observable<Cv[]> = this.cvService.getCvs().pipe(
     catchError(
       (e) => {
@@ -31,11 +35,7 @@ export class CvComponent {
   date = new Date();
   todoService = inject(TodoService);
 
-  constructor(
-    private logger: LoggerService,
-    private toastr: ToastrService,
-    private cvService: CvService
-  ) {
+  constructor() {
     // this.cvService.getCvs().subscribe({
     //   next: (cvs) => {
     //     this.cvs = cvs;
